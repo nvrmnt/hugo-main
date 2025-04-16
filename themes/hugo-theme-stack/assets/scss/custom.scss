@@ -1,0 +1,101 @@
+<style>
+    @font-face {
+        font-family: 'dinglienuoyanfont';
+        src: url({{ (resources.Get "font/dinglienuoyanfont.ttf").Permalink }}) format('truetype');
+    }
+
+    :root {
+        --base-font-family: 'dinglienuoyanfont';
+        --code-font-family: 'dinglienuoyanfont';
+    }
+
+    #TableOfContents > ul,
+    ol {
+        ul,
+        ol {
+            display: none;
+        }
+        .open {
+            display: block;
+        }
+    }
+
+    .highlight {
+        border-radius: var(--card-border-radius);
+        max-width: 100% !important;
+        margin: 0 !important;
+        box-shadow: var(--shadow-l1) !important;
+    }
+
+    .highlight:before {
+        content: "";
+        display: block;
+        background: url(../macOS-code-header.svg) no-repeat 0;
+        background-size: contain;
+        height: 18px;
+        margin-top: -10px;
+        margin-bottom: 10px;
+    }
+
+    /* 【Stack主题鼠标样式写法】 */
+    /* default光标图片 */
+    body,
+    html,
+    .article-content img {
+        cursor: url(../mouse/default.png), auto !important;
+    }
+
+    /* pointer光标图片 */
+    a:hover,
+    button:hover,
+    .copyCodeButton:hover,
+    #dark-mode-toggle {
+        cursor: url(../mouse/pointer.png), auto;
+    }
+
+    /* text光标图片 */
+    input:hover,
+    .site-description,
+    .article-subtitle,
+    .article-content span,
+    .article-content li,
+    .article-content p {
+        cursor: url(../mouse/text.png), auto;
+    }
+</style>
+
+<script>
+    function initTocHide() {
+        // 判断是否存在文章目录
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        // 监听滚动
+        window.addEventListener('scroll', function () {
+            //清除class值
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+                openUl.forEach((ul) => {
+                    ul.classList.remove("open");
+                });
+            }
+            // 获取active-class
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return;
+            }
+            // 展示子ul
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open");
+            }
+            // 展示父ul
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                ul = ul.parentElement.parentElement;
+            } while (ul!== undefined && (ul.localName === 'ul' || ul.localName === 'ol'));
+        });
+    }
+    initTocHide();
+</script>
