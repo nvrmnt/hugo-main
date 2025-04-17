@@ -1,12 +1,12 @@
 <style>
     @font-face {
-        font-family: 'dinglienuoyanfont';
-        src: url({{ (resources.Get "font/dinglienuoyanfont.ttf").Permalink }}) format('truetype');
+        font-family: 'zhuziawan';
+        src: url({{ (resources.Get "font/zhuziawan.ttf").Permalink }}) format('truetype');
     }
 
     :root {
-        --base-font-family: 'dinglienuoyanfont';
-        --code-font-family: 'dinglienuoyanfont';
+        --base-font-family: 'zhuziawan';
+        --code-font-family: 'zhuziawan';
     }
 
     #TableOfContents > ul,
